@@ -1,0 +1,107 @@
+$prim-bg-color: #24292f;
+$sec-bg-color: white;
+$prim-txt-color: white;
+$sec-txt-color: #24292f;
+$main-link: #444444;
+$even-row: #dadada;
+
+body {
+  min-height: 100vh;
+  color: $prim-txt-color;
+  background: $sec-bg-color;
+  transition: color 0.5s, background-color 0.5s;
+  line-height: 1.6;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  font-size: 15px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.header {
+  grid-area: header;
+  background-color: $prim-bg-color;
+  color: white;
+  height: 80px;
+  padding: 1%;
+}
+
+.header_text {
+  margin-left: 2%;
+  font-weight: bold;
+  display: block;
+  color: $prim-txt-color;
+}
+
+.username_text {
+    margin-left: 2%;
+    font-weight: bold;
+    display: block;
+    color: $sec-txt-color;
+  }
+
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer {
+  grid-area: footer;
+  background-color: $prim-bg-color;
+  height: 120px;
+  padding: 3%;
+}
+
+
+
+table.paleBlueRows {
+    border: 1px solid $sec-txt-color;
+    width: 350px;
+    height: 200px;
+    text-align: center;
+    border-collapse: collapse;
+    margin-top: 2em;
+    color:  $sec-txt-color;
+  }
+  table.paleBlueRows td, table.paleBlueRows th {
+    border: 1px solid #FFFFFF;
+    padding: 3px 2px;
+  }
+  table.paleBlueRows tbody td {
+    font-size: 13px;
+  }
+  table.paleBlueRows tr:nth-child(even) {
+    background: $even-row;
+  }
+  table.paleBlueRows thead {
+    background:  var(--github-userboard-primary);
+    border-bottom: 5px solid #FFFFFF;
+  }
+  table.paleBlueRows thead th {
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+    border-left: 2px solid #FFFFFF;
+  }
+  table.paleBlueRows thead th:first-child {
+    border-left: none;
+  }
+  
+  table.paleBlueRows tfoot {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333333;
+    background: #D0E4F5;
+    border-top: 3px solid #444444;
+  }
+  table.paleBlueRows tfoot td {
+    font-size: 14px;
+  }
+
+  .links{
+        color:$main-link;
+  }

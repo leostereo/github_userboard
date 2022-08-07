@@ -36,8 +36,8 @@ async function getUserDetails() {
       <br />
       <div class="logo">
         <img class="avatar" v-bind:src="userDetail.avatar_url" />
-        <span class="header_text" style="margin-left: 1em">
-          userDetail.name
+        <span class="username_text" style="margin-left: 1em">
+          {{userDetail.name}}
         </span>
       </div>
       <table class="paleBlueRows">
@@ -51,7 +51,7 @@ async function getUserDetails() {
         <tbody>
           <tr v-for="repo in userRepos" :key="repo.id">
             <td>
-              <a v-bind:href="repo.html_url">{{ repo.name }}</a>
+              <a class="links" v-bind:href="repo.html_url">{{ repo.name }}</a>
             </td>
             <td>{{ repo.forks }}</td>
             <td>{{ repo.watchers }}</td>
