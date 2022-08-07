@@ -69,12 +69,6 @@
   min-width: 50%;
 
 }
-.not_found_msg{
-  display: flex; /* or inline-flex */
-  flex-wrap: wrap;
-  justify-content: space-around;
-  text-align: center;
-}
 
 .user_container {
   display: flex; 

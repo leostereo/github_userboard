@@ -105,3 +105,10 @@ table.paleBlueRows {
   .links{
         color:$main-link;
   }
+
+  .not_found_msg{
+    text-align: center;
+    font-weight: bold;
+    color: $sec-txt-color;
+  }
+  
