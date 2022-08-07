@@ -1,25 +1,36 @@
 <script setup>
-import { ref, onMounted, computed, watch } from "vue";
-import { userStrings } from "../stores/userStrings";
+import { ref, onMounted, computed, watch, onUnmounted } from "vue";
 import UserComponent from "@/components/UserComponent.vue";
+import { userStrings } from "../stores/userStrings";
+import ApiServices from "../services/ApiServices";
 
 const searchString = userStrings();
-
-let fix_user;
+const readyForRender = ref(false);
 const haveMatch = ref(true);
 const users = ref([]);
-
-onMounted(() => {
-  fetch("https://api.github.com/users?per_page=8")
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      users.value = data;
-      fix_user = data;
-    });
-});
+let fix_user;
 
 const find_string = computed(() => searchString.user_find);
+
+
+onMounted(() => {
+  getUsers();
+});
+
+onUnmounted(() => {
+  readyForRender.value = false;
+});
+
+async function getUsers() {
+  ApiServices.getUsers().then((data) => {
+    users.value = data;
+    fix_user = data;
+  });
+
+  readyForRender.value = true;
+
+}
+
 
 watch(find_string, (newString) => {
   console.log(`search string is ${newString}`);
@@ -53,10 +64,9 @@ const userList = computed({
 </script>
 
 <template>
-  <main class="main">
-
+  <main class="main" v-if="readyForRender">
     <div v-if="!haveMatch" class="not_found_msg">
-    <p>Users not found</p>
+      <p>Users not found</p>
     </div>
 
     <div class="users_chart_container">
@@ -64,7 +74,7 @@ const userList = computed({
         <UserComponent
           :avatar="user.avatar_url"
           :username="user.login"
-          :url="user.url"
+          :url="user.html_url"
         />
       </div>
     </div>

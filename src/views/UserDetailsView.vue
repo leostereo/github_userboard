@@ -1,41 +1,45 @@
 <script setup>
+import { ref, onMounted, onUnmounted } from "vue";
+import ApiServices from "../services/ApiServices";
 import { useRoute } from "vue-router";
-import { ref, onMounted, computed, watch } from "vue";
+
 
 const route = useRoute();
-const userDetail = ref({});
 const userRepos = ref([]);
+const userDetail = ref({});
 const readyForRender = ref(false);
 
 onMounted(() => {
-  fetch(`https://api.github.com/users/${route.params.username}`)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      userDetail.value = data;
-    })
-    .then(
-      fetch(`https://api.github.com/users/${route.params.username}/repos`)
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          userRepos.value = data;
-          readyForRender.value = true;
-        })
-    );
+  getUserDetails();
 });
+
+onUnmounted(() => {
+  readyForRender.value = false;
+});
+
+async function getUserDetails() {
+  ApiServices.getUserDetails(route.params.username).then((data) => {
+    userDetail.value = data;
+  });
+
+  ApiServices.getUserRepos(route.params.username).then((data) => {
+    userRepos.value = data;
+  });
+
+  readyForRender.value = true;
+}
 </script>
+
 <template>
   <main class="main" v-if="readyForRender">
     <div class="user_container">
       <br />
       <div class="logo">
         <img class="avatar" v-bind:src="userDetail.avatar_url" />
-        <span class="header_text" style="margin-left: 1em">{{
+        <span class="header_text" style="margin-left: 1em">
           userDetail.name
-        }}</span>
+        </span>
       </div>
-
       <table class="paleBlueRows">
         <thead>
           <tr>
